@@ -1,6 +1,6 @@
 "use client";
 
-import { useScroll } from "@react-three/drei";
+import { useScroll, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
@@ -52,6 +52,7 @@ export function SceneController(props: SceneControllerProps) {
     <>
       <group ref={cameraGroup}>
         {/* We use a group to hold the camera so we can move the group and still allow the camera to shake or look around if needed later */}
+        <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
       </group>
 
       <ambientLight intensity={0.4} />
