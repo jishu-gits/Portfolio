@@ -27,8 +27,18 @@
     ],
     "github": "https://github.com/jishu-gits/Dungeon-Generator-",
     "demo": "",
-    "images": ["/documents/stage4.png"],
-    "videos": ["/documents/dungeon_evolution.gif"],
+    "images": [
+      {
+        "src": "/documents/stage4.png",
+        "alt": "Stage 4 Dungeon Generation"
+      }
+    ],
+    "videos": [
+      {
+        "label": "Dungeon Evolution",
+        "url": "/documents/dungeon_evolution.gif"
+      }
+    ],
     "certificates": [],
     "documents": []
   },
@@ -43,7 +53,12 @@
     "github": "",
     "demo": "",
     "images": [],
-    "videos": ["/documents/Verterra_StarScene.mp4"],
+    "videos": [
+      {
+        "label": "Verterra StarScene Demo",
+        "url": "/documents/Verterra_StarScene.mp4"
+      }
+    ],
     "certificates": [],
     "documents": []
   }
