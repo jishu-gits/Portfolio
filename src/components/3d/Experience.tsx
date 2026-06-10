@@ -3,7 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls } from "@react-three/drei";
 import { SceneController } from "./SceneController";
-import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience as ExperienceType } from "@/lib/content-schema";
+import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience as ExperienceType, Certification } from "@/lib/content-schema";
 
 type ExperienceProps = {
   profile: Profile;
@@ -18,6 +18,7 @@ type ExperienceProps = {
   skills: SkillGroup[];
   timeline: TimelineItem[];
   experience: ExperienceType[];
+  certifications: Certification[];
 };
 
 export default function Experience(props: ExperienceProps) {

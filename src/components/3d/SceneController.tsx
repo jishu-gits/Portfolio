@@ -11,7 +11,7 @@ import { VerterraScene } from "./scenes/VerterraScene";
 import { SkillsScene } from "./scenes/SkillsScene";
 import { TimelineScene } from "./scenes/TimelineScene";
 
-import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience } from "@/lib/content-schema";
+import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience, Certification } from "@/lib/content-schema";
 
 type SceneControllerProps = {
   profile: Profile;
@@ -26,6 +26,7 @@ type SceneControllerProps = {
   skills: SkillGroup[];
   timeline: TimelineItem[];
   experience: Experience[];
+  certifications: Certification[];
 };
 
 export function SceneController(props: SceneControllerProps) {
