@@ -1,15 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import {
   Award,
   ExternalLink,
   FileText,
   Github,
   ImageIcon,
-  Play
+  Play,
+  ArrowRight
 } from "lucide-react";
 import Image from "next/image";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Modal } from "@/components/ui/modal";
 import type { Project } from "@/lib/content-schema";
 import { hasItems, isPresent } from "@/lib/utils";
 
@@ -100,12 +105,22 @@ function ProjectMedia({ project }: { project: Project }) {
   );
 }
 
+function truncateToFirstSentence(text: string, maxLength = 100): string {
+  const firstSentence = text.split(/\.\s/)[0];
+  if (firstSentence.length <= maxLength) {
+    return firstSentence + ".";
+  }
+  return firstSentence.slice(0, maxLength) + "…";
+}
+
 export function ProjectsSection({ projects }: { projects: Project[] }) {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   return (
     <section className="section-band py-20 sm:py-28" id="projects">
       <div className="container">
         <SectionHeading
-          description="A CMS-like project format supports optional images, videos, certificates, and documents without changing React components."
+          description="Click any project to explore full details, media, and links."
           eyebrow="Projects"
           title="Selected systems and prototypes."
         />
@@ -113,9 +128,18 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {projects.map((project) => (
             <article
-              className="technical-panel flex flex-col rounded-md p-6"
+              className="technical-panel card-hover-lift group cursor-pointer rounded-md p-6"
               data-gsap-reveal
               key={project.title}
+              onClick={() => setSelectedProject(project)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedProject(project);
+                }
+              }}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -123,44 +147,91 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
                     {project.title}
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                    {project.description}
+                    {truncateToFirstSentence(project.description)}
                   </p>
                 </div>
-                <ImageIcon aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-primary" />
+                <ImageIcon
+                  aria-hidden="true"
+                  className="mt-1 h-5 w-5 shrink-0 text-primary"
+                />
               </div>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {project.technologies.map((technology) => (
+                {project.technologies.slice(0, 4).map((technology) => (
                   <Badge key={technology} variant="secondary">
                     {technology}
                   </Badge>
                 ))}
+                {project.technologies.length > 4 ? (
+                  <Badge variant="outline">
+                    +{project.technologies.length - 4}
+                  </Badge>
+                ) : null}
               </div>
 
-              <ProjectMedia project={project} />
-
-              <div className="mt-auto flex flex-wrap gap-3 pt-6">
-                {isPresent(project.github) ? (
-                  <Button asChild data-sound size="sm" variant="outline">
-                    <a href={project.github} rel="noreferrer" target="_blank">
-                      <Github aria-hidden="true" className="h-4 w-4" />
-                      GitHub
-                    </a>
-                  </Button>
-                ) : null}
-                {isPresent(project.demo) ? (
-                  <Button asChild data-sound size="sm">
-                    <a href={project.demo} rel="noreferrer" target="_blank">
-                      Demo
-                      <ExternalLink aria-hidden="true" className="h-4 w-4" />
-                    </a>
-                  </Button>
-                ) : null}
+              <div className="mt-4 flex items-center gap-2 font-mono text-xs text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="animated-underline">View Details</span>
+                <ArrowRight className="h-3 w-3" />
               </div>
             </article>
           ))}
         </div>
       </div>
+
+      {/* Project Detail Modal */}
+      <Modal
+        open={selectedProject !== null}
+        onClose={() => setSelectedProject(null)}
+        title={selectedProject?.title}
+      >
+        {selectedProject ? (
+          <div>
+            <h2 className="text-2xl font-semibold text-foreground">
+              {selectedProject.title}
+            </h2>
+            <p className="mt-4 text-base leading-8 text-neutral-200">
+              {selectedProject.description}
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {selectedProject.technologies.map((technology) => (
+                <Badge key={technology} variant="secondary">
+                  {technology}
+                </Badge>
+              ))}
+            </div>
+
+            <ProjectMedia project={selectedProject} />
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              {isPresent(selectedProject.github) ? (
+                <Button asChild data-sound size="sm" variant="outline">
+                  <a
+                    href={selectedProject.github}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Github aria-hidden="true" className="h-4 w-4" />
+                    GitHub
+                  </a>
+                </Button>
+              ) : null}
+              {isPresent(selectedProject.demo) ? (
+                <Button asChild data-sound size="sm">
+                  <a
+                    href={selectedProject.demo}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Demo
+                    <ExternalLink aria-hidden="true" className="h-4 w-4" />
+                  </a>
+                </Button>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+      </Modal>
     </section>
   );
 }

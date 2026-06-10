@@ -21,9 +21,16 @@ export default function Home() {
     timeline
   } = portfolioContent;
 
+  const heroStats = {
+    projects: projects.length,
+    internships: experience.length,
+    certifications: certifications.length,
+    researchInterests: research.interests.length
+  };
+
   return (
     <PageTransition>
-      <HeroSection profile={profile} />
+      <HeroSection profile={profile} stats={heroStats} />
       <AboutSection profile={profile} />
       <SkillsSection skills={skills} />
       <ExperienceSection experience={experience} />
