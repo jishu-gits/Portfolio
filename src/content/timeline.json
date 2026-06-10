@@ -1,0 +1,50 @@
+[
+  {
+    "year": "2026",
+    "title": "Unity Developer Internship at iTeach",
+    "description": "Designed and developed AR/VR educational applications for school children with interactive 3D content in Unity.",
+    "tags": ["Unity", "AR/VR", "Internship"]
+  },
+  {
+    "year": "2025",
+    "title": "Research Direction Focused on Adaptive Rendering and Runtime Optimisation",
+    "description": "Began investigating middleware-level runtime frameworks for perceptual-aware rendering under constrained hardware conditions.",
+    "tags": ["Research", "Rendering", "Optimisation"]
+  },
+  {
+    "year": "2025",
+    "title": "IBM Cyber Security Analyst",
+    "description": "Earned IBM Cyber Security Analyst certification, expanding knowledge in security analysis and threat detection.",
+    "tags": ["Certification", "Cyber Security", "IBM"]
+  },
+  {
+    "year": "2025",
+    "title": "Oracle Java Foundation Associate",
+    "description": "Achieved Oracle Java Foundation Associate certification, validating core Java programming competency.",
+    "tags": ["Certification", "Java", "Oracle"]
+  },
+  {
+    "year": "2024",
+    "title": "Procedural Dungeon Generator Development",
+    "description": "Designed a multi-stage hybrid procedural dungeon generator with 100% connectivity and comprehensive analytics tooling.",
+    "tags": ["Python", "Procedural", "Generation"]
+  },
+  {
+    "year": "2023",
+    "title": "AR/VR/XR Certification from University of Michigan",
+    "description": "Completed Intro to AR/VR/MR/XR: Technologies, Applications and Issues through Coursera.",
+    "tags": ["Certification", "XR", "Coursera"]
+  },
+  {
+    "year": "2023",
+    "title": "Indian Space Lab Internship",
+    "description": "Modified flight controller code, resolved sensor calibration errors, and enhanced CubeSat module accuracy at ISL.",
+    "tags": ["Internship", "UAV", "Space"]
+  },
+  {
+    "year": "2022",
+    "title": "Joined VIT Bhopal for B.Tech Computer Science and Engineering",
+    "description": "Began undergraduate studies in Computer Science and Engineering at Vellore Institute of Technology, Bhopal.",
+    "tags": ["Education", "VIT", "CSE"]
+  }
+]

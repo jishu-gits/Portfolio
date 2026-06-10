@@ -1,0 +1,44 @@
+{
+  "statement": "My research focuses on adaptive runtime orchestration for perceptual-aware rendering under constrained hardware conditions. Modern interactive applications often struggle to maintain visual quality and responsiveness due to fluctuating rendering workloads, GPU bottlenecks, memory pressure, and frame pacing instability. This work investigates middleware-level runtime frameworks that continuously monitor rendering workload, GPU utilisation, memory pressure, and frame pacing, then dynamically coordinate adaptation strategies to intelligently balance computational cost and visual impact in real time.",
+  "interests": [
+    "Real-Time Rendering Systems",
+    "Adaptive Graphics and Runtime Optimisation",
+    "GPU Performance Analysis",
+    "Middleware Architectures",
+    "Virtual and Augmented Reality (VR/AR)",
+    "Interactive Graphics and Visual Computing",
+    "Human-Centred Computing"
+  ],
+  "projects": [
+    {
+      "id": "dynamic-resolution-scaling",
+      "title": "Dynamic Resolution Scaling",
+      "phase": "Active",
+      "description": "Investigating runtime frameworks that dynamically adjust rendering resolution based on GPU utilisation and frame pacing metrics to maintain visual quality under constrained conditions.",
+      "methods": ["GPU profiling", "Frame timing analysis", "Perceptual quality metrics"],
+      "links": []
+    },
+    {
+      "id": "shader-complexity-adaptation",
+      "title": "Shader Complexity and LOD Adaptation",
+      "phase": "Active",
+      "description": "Developing adaptation policies for shader complexity adjustment, texture streaming optimisation, and level-of-detail adaptation driven by perceptual-aware decision frameworks.",
+      "methods": ["Shader profiling", "Texture streaming", "LOD management"],
+      "links": []
+    },
+    {
+      "id": "frame-pacing-stabilisation",
+      "title": "Frame Pacing Stabilisation",
+      "phase": "Exploration",
+      "description": "Exploring runtime decision frameworks for frame pacing stabilisation that coordinate multiple adaptation strategies to maintain smooth interactive experiences across diverse hardware platforms.",
+      "methods": ["Frame budget analysis", "Memory pressure monitoring", "Workload prediction"],
+      "links": []
+    }
+  ],
+  "futureDirections": [
+    "Develop runtime decision frameworks for perceptual-aware adaptation policies.",
+    "Benchmark adaptation strategies across diverse hardware platforms.",
+    "Integrate GPU utilisation and memory pressure monitoring into middleware pipelines.",
+    "Publish reproducible testbeds for adaptive rendering research."
+  ]
+}

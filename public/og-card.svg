@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Computer Science Engineer Portfolio">
+  <rect width="1200" height="630" fill="#050505"/>
+  <g opacity=".18">
+    <path d="M0 120h1200M0 240h1200M0 360h1200M0 480h1200M150 0v630M300 0v630M450 0v630M600 0v630M750 0v630M900 0v630M1050 0v630" stroke="#2dd4bf" stroke-width="1"/>
+  </g>
+  <path d="M142 438 317 112h84L226 438h-84Zm308 0 175-326h84L534 438h-84Z" fill="#2dd4bf"/>
+  <path d="M785 176h214v42H785v-42Zm0 92h274v42H785v-42Zm0 92h174v42H785v-42Z" fill="#d6d3d1"/>
+  <text x="142" y="526" fill="#f5f5f4" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Unity XR, Procedural Graphics, Adaptive Rendering</text>
+  <text x="785" y="448" fill="#84cc16" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Research Portfolio</text>
+</svg>

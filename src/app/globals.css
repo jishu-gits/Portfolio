@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: Inter;
+  --font-space-mono: "Space Mono";
+  --background: 0 0% 3%;
+  --foreground: 0 0% 96%;
+  --card: 0 0% 6%;
+  --card-foreground: 0 0% 96%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 174 72% 56%;
+  --primary-foreground: 0 0% 3%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 94%;
+  --muted: 0 0% 13%;
+  --muted-foreground: 0 0% 65%;
+  --accent: 158 64% 52%;
+  --accent-foreground: 0 0% 3%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 17%;
+  --input: 0 0% 14%;
+  --ring: 174 72% 56%;
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+  background: hsl(var(--background));
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.94), rgba(5, 5, 5, 0.99)),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(45, 212, 191, 0.28);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border: 2px solid #050505;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f3f;
+}
+
+@layer base {
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .section-band {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0)),
+      hsl(var(--background));
+  }
+
+  .technical-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+      rgba(12, 12, 12, 0.88);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.34);
+  }
+
+  .signal-line {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .signal-line::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.26), transparent);
+    transform: translateX(-100%);
+    animation: scan 4s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

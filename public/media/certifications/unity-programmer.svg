@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="Unity programmer certificate preview">
+  <rect width="900" height="560" fill="#050505"/>
+  <rect x="54" y="54" width="792" height="452" rx="10" fill="#0f0f0f" stroke="#2dd4bf" stroke-width="3"/>
+  <path d="M120 150h260M120 204h420M120 252h330" stroke="#d6d3d1" stroke-width="18" stroke-linecap="round"/>
+  <path d="M120 356h230M120 404h180" stroke="#737373" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="690" cy="300" r="90" fill="#2dd4bf" opacity=".18"/>
+  <path d="M638 301h104M690 249v104" stroke="#84cc16" stroke-width="14" stroke-linecap="round"/>
+  <text x="120" y="118" fill="#84cc16" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Unity Certification</text>
+</svg>

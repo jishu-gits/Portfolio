@@ -1,0 +1,35 @@
+[
+  {
+    "title": "AI-Powered Quiz Generator",
+    "description": "Developed a Java Spring Boot application accepting PDF inputs and generating quizzes via an integrated Python ML pipeline. Implemented NLP-driven text extraction and question generation workflows. Containerised the system with Docker and achieved approximately 90% question relevance accuracy.",
+    "technologies": ["Java", "Spring Boot", "Python", "Docker", "Hugging Face Transformers", "Granite 3.2", "PyPDF2"],
+    "github": "",
+    "demo": "",
+    "images": [],
+    "videos": [],
+    "certificates": [],
+    "documents": []
+  },
+  {
+    "title": "Procedural Dungeon Generator",
+    "description": "Designed a multi-stage hybrid procedural dungeon generator integrating rectangular rooms, handcrafted prefabs, and BFS cave expansion. Achieved 100% dungeon connectivity across 100 test runs. Implemented evaluation metrics, CSV analytics, visualisation tools, animated GIF/MP4 outputs, and an interactive Jupyter Notebook interface with real-time parameter controls.",
+    "technologies": ["Python", "Jupyter Notebook"],
+    "github": "",
+    "demo": "",
+    "images": [],
+    "videos": [],
+    "certificates": [],
+    "documents": []
+  },
+  {
+    "title": "Verterra: Your World, Your Impact",
+    "description": "Developed an educational XR simulation where users manipulate climate variables and observe environmental impacts across global regions. Implemented AR-based region placement mechanics inspired by geographic visualisation systems. Designed interconnected environmental simulation models demonstrating the effects of emissions, deforestation, ecosystem degradation, and restoration.",
+    "technologies": ["Unity 3D", "C#", "AR/VR"],
+    "github": "",
+    "demo": "",
+    "images": [],
+    "videos": [],
+    "certificates": [],
+    "documents": []
+  }
+]

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Procedural biome node map">
+  <rect width="1280" height="720" fill="#050505"/>
+  <g stroke="#2dd4bf" stroke-opacity=".2">
+    <path d="M120 120h1040M120 240h1040M120 360h1040M120 480h1040M120 600h1040"/>
+    <path d="M160 80v560M320 80v560M480 80v560M640 80v560M800 80v560M960 80v560M1120 80v560"/>
+  </g>
+  <g fill="none" stroke-width="5" stroke-linecap="round">
+    <path d="M224 456c112-92 201-74 276-164 78-94 185-110 302-28 92 64 167 46 250-55" stroke="#2dd4bf"/>
+    <path d="M240 520c146-48 244-20 338-86 106-74 218-86 356 10" stroke="#84cc16" opacity=".85"/>
+  </g>
+  <g>
+    <circle cx="224" cy="456" r="44" fill="#0f0f0f" stroke="#2dd4bf" stroke-width="3"/>
+    <circle cx="500" cy="292" r="58" fill="#0f0f0f" stroke="#84cc16" stroke-width="3"/>
+    <circle cx="802" cy="264" r="76" fill="#0f0f0f" stroke="#2dd4bf" stroke-width="3"/>
+    <circle cx="1052" cy="209" r="50" fill="#0f0f0f" stroke="#84cc16" stroke-width="3"/>
+  </g>
+  <g fill="#d6d3d1" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">
+    <text x="183" y="464">Seed</text>
+    <text x="444" y="300">Noise</text>
+    <text x="730" y="272">Biome</text>
+    <text x="1004" y="218">LOD</text>
+  </g>
+</svg>

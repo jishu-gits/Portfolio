@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="XR foundations certificate preview">
+  <rect width="900" height="560" fill="#050505"/>
+  <g opacity=".16" stroke="#2dd4bf">
+    <path d="M0 112h900M0 224h900M0 336h900M0 448h900"/>
+    <path d="M150 0v560M300 0v560M450 0v560M600 0v560M750 0v560"/>
+  </g>
+  <rect x="80" y="82" width="740" height="396" rx="8" fill="#0f0f0f" stroke="#3f3f3f"/>
+  <text x="124" y="160" fill="#84cc16" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">XR Development Foundations</text>
+  <path d="M124 224h420M124 278h320M124 332h240" stroke="#d6d3d1" stroke-width="16" stroke-linecap="round"/>
+  <path d="M626 250c0-42 34-76 76-76s76 34 76 76-34 76-76 76-76-34-76-76Z" fill="none" stroke="#2dd4bf" stroke-width="12"/>
+  <path d="M660 250h84" stroke="#84cc16" stroke-width="10" stroke-linecap="round"/>
+</svg>

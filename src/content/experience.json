@@ -1,0 +1,25 @@
+[
+  {
+    "role": "Unity Developer Intern",
+    "organization": "iTeach",
+    "duration": "March 2026 – May 2026",
+    "achievements": [
+      "Designed and developed UI/UX interfaces for an AR/VR educational application for school children across multiple grade levels, enhancing engagement through animated and 3D interactive content.",
+      "Wrote and maintained C# scripts within Unity 3D to implement scene management, interactive learning modules, and real-time 3D object behaviour.",
+      "Integrated AR/VR workflows into the Unity pipeline to deliver immersive educational experiences with 3D animated curriculum-aligned content.",
+      "Collaborated on UI/UX design iterations in Figma and implemented responsive, child-friendly interfaces optimised for AR/VR headset and mobile AR platforms."
+    ],
+    "mediaEvidence": []
+  },
+  {
+    "role": "Intern",
+    "organization": "Indian Space Lab (ISL)",
+    "duration": "December 2023 – January 2024",
+    "achievements": [
+      "Modified flight controller and mission-planning code, improving UAV test-flight stability and navigation accuracy by approximately 30%.",
+      "Resolved a critical sensor calibration error affecting remote sensing data and improved analysis accuracy by 35–40%.",
+      "Enhanced CubeSat module sensor calibration, achieving a 15% improvement in data accuracy and an 8% reduction in data noise during environmental testing."
+    ],
+    "mediaEvidence": []
+  }
+]

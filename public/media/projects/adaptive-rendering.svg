@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Adaptive rendering control surface">
+  <rect width="1280" height="720" fill="#050505"/>
+  <g opacity=".14" stroke="#2dd4bf">
+    <path d="M0 90h1280M0 180h1280M0 270h1280M0 360h1280M0 450h1280M0 540h1280M0 630h1280"/>
+    <path d="M160 0v720M320 0v720M480 0v720M640 0v720M800 0v720M960 0v720M1120 0v720"/>
+  </g>
+  <g transform="translate(140 120)">
+    <rect width="1000" height="480" rx="12" fill="#0f0f0f" stroke="#2dd4bf" stroke-opacity=".45"/>
+    <path d="M80 330c110-120 180-132 280-76s170 36 260-54 186-112 300-62" fill="none" stroke="#84cc16" stroke-width="8" stroke-linecap="round"/>
+    <path d="M80 386h840" stroke="#3f3f3f" stroke-width="2"/>
+    <circle cx="360" cy="254" r="54" fill="#2dd4bf" opacity=".16"/>
+    <circle cx="620" cy="202" r="82" fill="#84cc16" opacity=".11"/>
+    <rect x="78" y="72" width="220" height="28" rx="6" fill="#d6d3d1" opacity=".9"/>
+    <rect x="78" y="122" width="130" height="18" rx="4" fill="#2dd4bf" opacity=".75"/>
+    <rect x="760" y="70" width="160" height="26" rx="6" fill="#84cc16" opacity=".78"/>
+    <g fill="#d6d3d1" opacity=".8">
+      <rect x="760" y="132" width="110" height="12" rx="3"/>
+      <rect x="760" y="164" width="152" height="12" rx="3"/>
+      <rect x="760" y="196" width="92" height="12" rx="3"/>
+    </g>
+  </g>
+</svg>

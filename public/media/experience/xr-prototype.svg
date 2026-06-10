@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="XR prototype evidence image">
+  <rect width="1280" height="720" fill="#050505"/>
+  <g transform="translate(160 120)">
+    <rect width="960" height="480" rx="12" fill="#0f0f0f" stroke="#3f3f3f"/>
+    <rect x="80" y="86" width="280" height="220" rx="18" fill="#151515" stroke="#2dd4bf" stroke-width="4"/>
+    <rect x="600" y="86" width="280" height="220" rx="18" fill="#151515" stroke="#2dd4bf" stroke-width="4"/>
+    <path d="M360 196c80-58 160-58 240 0" fill="none" stroke="#84cc16" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="220" cy="196" r="52" fill="none" stroke="#84cc16" stroke-width="8"/>
+    <circle cx="740" cy="196" r="52" fill="none" stroke="#84cc16" stroke-width="8"/>
+    <path d="M150 382h660M150 420h430" stroke="#d6d3d1" stroke-width="16" stroke-linecap="round" opacity=".82"/>
+  </g>
+</svg>

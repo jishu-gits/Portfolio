@@ -1,0 +1,39 @@
+{
+  "name": "Bidhan Manna",
+  "role": "Computer Science Engineer",
+  "headline": "Computer Science Engineer | Unity Developer | XR Developer | Graphics Systems Researcher",
+  "location": "India",
+  "availability": "Open to XR engineering, graphics R&D, and research collaborations",
+  "email": "mannabidhan036@gmail.com",
+  "resumeUrl": "",
+  "avatar": "",
+  "summary": "I am a Computer Science and Engineering graduate from Vellore Institute of Technology with interests in XR development, procedural content generation, real-time graphics systems, adaptive rendering, and runtime optimisation. My work spans Unity-based AR/VR applications, procedural world generation, educational XR experiences, machine learning applications, and graphics systems research. I am particularly interested in designing perceptual-aware runtime systems that intelligently balance visual quality and performance across diverse hardware platforms.",
+  "introPhrases": [
+    "Building immersive AR/VR experiences and procedural content generation systems.",
+    "Designing adaptive runtime frameworks for interactive graphics.",
+    "Researching perceptual-aware rendering for real-time applications."
+  ],
+  "specialties": [
+    "Unity",
+    "XR/AR/VR",
+    "Procedural Generation",
+    "Graphics Systems",
+    "Adaptive Rendering"
+  ],
+  "socials": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/BidhanManna"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/bidhanmanna"
+    }
+  ],
+  "seo": {
+    "title": "Bidhan Manna - Unity XR and Graphics Research Portfolio",
+    "description": "Portfolio of Bidhan Manna, a Computer Science Engineer specializing in Unity, XR/AR/VR, procedural generation, graphics systems, and adaptive rendering research.",
+    "siteUrl": "https://your-vercel-domain.vercel.app",
+    "ogImage": "/og-card.svg"
+  }
+}

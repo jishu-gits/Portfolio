@@ -1,0 +1,116 @@
+[
+  {
+    "category": "Programming Languages",
+    "summary": "Core programming languages used across application development, systems research, and data-driven workflows.",
+    "items": [
+      {
+        "name": "Java",
+        "level": 90,
+        "focus": "Spring Boot applications, backend systems"
+      },
+      {
+        "name": "C#",
+        "level": 88,
+        "focus": "Unity development, XR applications"
+      },
+      {
+        "name": "Python",
+        "level": 85,
+        "focus": "ML pipelines, procedural generation, scripting"
+      },
+      {
+        "name": "C++",
+        "level": 75,
+        "focus": "Systems programming, performance-critical code"
+      },
+      {
+        "name": "HTML/CSS",
+        "level": 80,
+        "focus": "Web interfaces, responsive layouts"
+      },
+      {
+        "name": "SQL",
+        "level": 82,
+        "focus": "Database queries, data management"
+      }
+    ]
+  },
+  {
+    "category": "Frameworks and Tools",
+    "summary": "Development frameworks, version control, containerisation, design, and 3D tooling for production workflows.",
+    "items": [
+      {
+        "name": "Unity",
+        "level": 90,
+        "focus": "AR/VR applications, 3D interaction, simulation"
+      },
+      {
+        "name": "Spring Boot",
+        "level": 85,
+        "focus": "REST APIs, backend microservices"
+      },
+      {
+        "name": "Git / GitHub",
+        "level": 88,
+        "focus": "Version control, collaboration workflows"
+      },
+      {
+        "name": "Docker",
+        "level": 78,
+        "focus": "Containerisation, deployment pipelines"
+      },
+      {
+        "name": "Blender / Figma",
+        "level": 75,
+        "focus": "3D modelling, UI/UX design prototyping"
+      }
+    ]
+  },
+  {
+    "category": "Databases",
+    "summary": "Relational and document-based database systems for application data management.",
+    "items": [
+      {
+        "name": "MySQL",
+        "level": 84,
+        "focus": "Relational data, schema design, queries"
+      },
+      {
+        "name": "MongoDB",
+        "level": 80,
+        "focus": "Document stores, flexible schemas"
+      }
+    ]
+  },
+  {
+    "category": "Domains",
+    "summary": "Specialised domains spanning XR engineering, graphics research, procedural systems, and human-centred computing.",
+    "items": [
+      {
+        "name": "AR/VR Systems",
+        "level": 90,
+        "focus": "Immersive experiences, spatial interaction"
+      },
+      {
+        "name": "Real-Time Rendering",
+        "level": 85,
+        "focus": "Graphics pipelines, adaptive quality"
+      },
+      {
+        "name": "Procedural Generation",
+        "level": 88,
+        "focus": "World building, dungeon generation, terrain"
+      },
+      {
+        "name": "Machine Learning",
+        "level": 78,
+        "focus": "NLP pipelines, data-driven systems"
+      },
+      {
+        "name": "GPU Performance Analysis",
+        "level": 80,
+        "focus": "Profiling, bottleneck isolation, optimisation"
+      }
+    ]
+  }
+]
