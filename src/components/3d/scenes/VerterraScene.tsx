@@ -31,6 +31,23 @@ export function VerterraScene({ projects }: { projects: Project[] }) {
           <p className="text-sm text-neutral-300 font-mono mb-4 leading-relaxed">
             {project?.description || "A dynamic globe visualizing environmental data and ecosystem transitions."}
           </p>
+
+          {/* Conditional Media Render */}
+          {project?.videos && project.videos.length > 0 && (
+            <div className="mb-4 rounded-lg overflow-hidden border border-white/10">
+              {project.videos[0].url.endsWith('.mp4') ? (
+                <video src={project.videos[0].url} autoPlay loop muted playsInline className="w-full h-auto" />
+              ) : (
+                <img src={project.videos[0].url} alt={project.videos[0].label} className="w-full h-auto" />
+              )}
+            </div>
+          )}
+          {project?.images && project.images.length > 0 && (!project.videos || project.videos.length === 0) && (
+            <div className="mb-4 rounded-lg overflow-hidden border border-white/10">
+              <img src={project.images[0].src} alt={project.images[0].alt} className="w-full h-auto" />
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-2">
             {project?.technologies?.map((tech: string) => (
               <Badge key={tech} variant="secondary" className="text-xs bg-white/5 border-white/10">
