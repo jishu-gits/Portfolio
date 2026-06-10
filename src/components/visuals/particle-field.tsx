@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -78,15 +78,9 @@ function SignalRings() {
 
 export function ParticleField() {
   return (
-    <div className="absolute inset-0">
-      <Canvas
-        camera={{ position: [0, 0.15, 5.6], fov: 58 }}
-        dpr={[1, 1.5]}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-      >
-        <ResearchParticles />
-        <SignalRings />
-      </Canvas>
-    </div>
+    <group position={[0, 0, -2]}>
+      <ResearchParticles />
+      <SignalRings />
+    </group>
   );
 }

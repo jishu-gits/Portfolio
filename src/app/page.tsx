@@ -1,14 +1,10 @@
-import { AboutSection } from "@/components/sections/about-section";
-import { CertificationsSection } from "@/components/sections/certifications-section";
-import { ContactSection } from "@/components/sections/contact-section";
-import { ExperienceSection } from "@/components/sections/experience-section";
-import { HeroSection } from "@/components/sections/hero-section";
-import { ProjectsSection } from "@/components/sections/projects-section";
-import { ResearchSection } from "@/components/sections/research-section";
-import { SkillsSection } from "@/components/sections/skills-section";
-import { TimelineSection } from "@/components/sections/timeline-section";
+import dynamic from "next/dynamic";
 import { PageTransition } from "@/components/layout/page-transition";
 import { portfolioContent } from "@/lib/content";
+
+const Experience = dynamic(() => import("@/components/3d/Experience"), {
+  ssr: false,
+});
 
 export default function Home() {
   const {
@@ -30,15 +26,18 @@ export default function Home() {
 
   return (
     <PageTransition>
-      <HeroSection profile={profile} stats={heroStats} />
-      <AboutSection profile={profile} />
-      <SkillsSection skills={skills} />
-      <ExperienceSection experience={experience} />
-      <ProjectsSection projects={projects} />
-      <ResearchSection research={research} />
-      <CertificationsSection certifications={certifications} />
-      <TimelineSection timeline={timeline} />
-      <ContactSection profile={profile} />
+      <main className="h-[100dvh] w-full overflow-hidden bg-[#050505]">
+        <Experience 
+          profile={profile}
+          stats={heroStats}
+          skills={skills}
+          experience={experience}
+          projects={projects}
+          research={research}
+          certifications={certifications}
+          timeline={timeline}
+        />
+      </main>
     </PageTransition>
   );
 }
