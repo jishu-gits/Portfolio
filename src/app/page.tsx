@@ -1,10 +1,6 @@
-import dynamic from "next/dynamic";
 import { PageTransition } from "@/components/layout/page-transition";
 import { portfolioContent } from "@/lib/content";
-
-const Experience = dynamic(() => import("@/components/3d/Experience"), {
-  ssr: false,
-});
+import Experience from "@/components/3d/ExperienceWrapper";
 
 export default function Home() {
   const {
