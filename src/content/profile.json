@@ -23,17 +23,17 @@
   "socials": [
     {
       "label": "GitHub",
-      "url": "https://github.com/BidhanManna"
+      "url": "https://github.com/jishu-gits"
     },
     {
       "label": "LinkedIn",
-      "url": "https://linkedin.com/in/bidhanmanna"
+      "url": "https://www.linkedin.com/in/bidhan-manna-268205251/"
     }
   ],
   "seo": {
     "title": "Bidhan Manna - Unity XR and Graphics Research Portfolio",
     "description": "Portfolio of Bidhan Manna, a Computer Science Engineer specializing in Unity, XR/AR/VR, procedural generation, graphics systems, and adaptive rendering research.",
-    "siteUrl": "https://your-vercel-domain.vercel.app",
+    "siteUrl": "https://portfolio-omega-ashy-on3udzb115.vercel.app/",
     "ogImage": "/og-card.svg"
   }
 }
