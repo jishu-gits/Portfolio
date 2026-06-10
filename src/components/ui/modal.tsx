@@ -24,7 +24,7 @@ const panelVariants = {
     y: 0,
     scale: 1,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 360,
       damping: 34,
       mass: 0.8
@@ -34,7 +34,7 @@ const panelVariants = {
     opacity: 0,
     y: 24,
     scale: 0.97,
-    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] }
+    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] as const }
   }
 };
 
