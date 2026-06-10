@@ -15,9 +15,9 @@ export function CertificationsSection({
     <section className="section-band py-20 sm:py-28" id="certifications">
       <div className="container">
         <SectionHeading
-          description="Certificates are configured in JSON with optional PDF proofs and preview images."
+          description="Here are some of my certifications"
           eyebrow="Certifications"
-          title="Credential snapshots and proof-ready entries."
+          title="Credential snapshots."
         />
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
