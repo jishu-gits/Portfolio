@@ -87,43 +87,6 @@ export function DungeonScene({ projects }: { projects: Project[] }) {
         <boxGeometry args={[blockSize * 0.9, blockSize * 0.9, blockSize * 0.9]} />
         <meshStandardMaterial color="#84cc16" roughness={0.2} metalness={0.8} />
       </instancedMesh>
-
-      <Html position={[10, 5, 0]} transform center className="w-[400px] pointer-events-none">
-        <div className="technical-panel glassmorphism rounded-xl p-6 border border-white/10 bg-black/60 backdrop-blur-md pointer-events-auto">
-          <div className="flex justify-between items-center mb-4">
-            <Badge variant="accent">Procedural Generation</Badge>
-            {animating && <span className="text-xs text-primary animate-pulse flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-primary" /> Generating...</span>}
-          </div>
-          <h2 className="text-2xl font-semibold text-white mb-2">{project?.title || "Procedural Dungeon"}</h2>
-          <p className="text-sm text-neutral-300 font-mono mb-4 leading-relaxed">
-            {project?.description || "Simulating dungeon connectivity paths and room generation in real-time."}
-          </p>
-
-          {/* Conditional Media Render */}
-          {project?.videos && project.videos.length > 0 && (
-            <div className="mb-4 rounded-lg overflow-hidden border border-white/10">
-              {project.videos[0].url.endsWith('.mp4') ? (
-                <video src={project.videos[0].url} autoPlay loop muted playsInline className="w-full h-auto" />
-              ) : (
-                <img src={project.videos[0].url} alt={project.videos[0].label} className="w-full h-auto" />
-              )}
-            </div>
-          )}
-          {project?.images && project.images.length > 0 && (!project.videos || project.videos.length === 0) && (
-            <div className="mb-4 rounded-lg overflow-hidden border border-white/10">
-              <img src={project.images[0].src} alt={project.images[0].alt} className="w-full h-auto" />
-            </div>
-          )}
-
-          <div className="flex flex-wrap gap-2">
-            {project?.technologies?.map((tech: string) => (
-              <Badge key={tech} variant="secondary" className="text-xs bg-white/5 border-white/10">
-                {tech}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      </Html>
     </group>
   );
 }

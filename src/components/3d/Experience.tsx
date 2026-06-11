@@ -1,8 +1,9 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { ScrollControls } from "@react-three/drei";
+import { ScrollControls, Scroll } from "@react-three/drei";
 import { SceneController } from "./SceneController";
+import { DomOverlay } from "./DomOverlay";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience as ExperienceType, Certification } from "@/lib/content-schema";
 
 type ExperienceProps = {
@@ -30,9 +31,12 @@ export default function Experience(props: ExperienceProps) {
     >
       <color attach="background" args={["#0a0a0a"]} />
       
-      {/* 10 pages of scrolling space for the whole narrative */}
-      <ScrollControls damping={0.2} pages={12}>
+      {/* 6.5 pages of scrolling space for the 3D + DOM narrative */}
+      <ScrollControls damping={0.2} pages={6.5}>
         <SceneController {...props} />
+        <Scroll html>
+          <DomOverlay {...props} />
+        </Scroll>
       </ScrollControls>
     </Canvas>
   );
