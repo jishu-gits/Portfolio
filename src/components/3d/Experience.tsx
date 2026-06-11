@@ -31,8 +31,8 @@ export default function Experience(props: ExperienceProps) {
     >
       <color attach="background" args={["#0a0a0a"]} />
       
-      {/* 6.5 pages of scrolling space for the 3D + DOM narrative */}
-      <ScrollControls damping={0.2} pages={6.5}>
+      {/* 10.5 pages of scrolling space for the 9 core DOM sections + Projects expansion */}
+      <ScrollControls damping={0.2} pages={10.5}>
         <SceneController {...props} />
         <Scroll html>
           <DomOverlay {...props} />

@@ -29,6 +29,18 @@ type SceneControllerProps = {
   certifications: Certification[];
 };
 
+export const SCENE_Z = {
+  hero: 0,
+  about: -12,
+  skills: -24,
+  experience: -36,
+  projects: -48,
+  research: -72,
+  certifications: -84,
+  timeline: -96,
+  contact: -108,
+};
+
 export function SceneController(props: SceneControllerProps) {
   const scroll = useScroll();
   const cameraGroup = useRef<THREE.Group>(null);
@@ -37,7 +49,7 @@ export function SceneController(props: SceneControllerProps) {
     if (!cameraGroup.current) return;
     
     // Total travel distance down the Z axis
-    const maxZ = 60;
+    const maxZ = Math.abs(SCENE_Z.contact);
     const targetZ = -scroll.offset * maxZ;
     
     // Smooth camera movement
@@ -60,27 +72,27 @@ export function SceneController(props: SceneControllerProps) {
       <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#84cc16" />
 
       {/* Scenes spaced along the Z axis */}
-      <group position={[0, 0, 0]}>
+      <group position={[0, 0, SCENE_Z.hero]}>
         <HeroScene profile={props.profile} stats={props.stats} />
       </group>
 
-      <group position={[0, 0, -12]}>
-        <DungeonScene projects={props.projects} />
-      </group>
-
-      <group position={[0, 0, -24]}>
-        <ResearchScene research={props.research} />
-      </group>
-
-      <group position={[0, 0, -36]}>
-        <VerterraScene projects={props.projects} />
-      </group>
-
-      <group position={[0, 0, -48]}>
+      <group position={[0, 0, SCENE_Z.skills]}>
         <SkillsScene skills={props.skills} />
       </group>
 
-      <group position={[0, 0, -60]}>
+      {/* Projects span a larger Z-depth area (-48 to -60) */}
+      <group position={[0, 0, SCENE_Z.projects]}>
+        <DungeonScene projects={props.projects} />
+      </group>
+      <group position={[0, 0, SCENE_Z.projects - 12]}>
+        <VerterraScene projects={props.projects} />
+      </group>
+
+      <group position={[0, 0, SCENE_Z.research]}>
+        <ResearchScene research={props.research} />
+      </group>
+
+      <group position={[0, 0, SCENE_Z.timeline]}>
         <TimelineScene timeline={props.timeline} experience={props.experience} />
       </group>
     </>
