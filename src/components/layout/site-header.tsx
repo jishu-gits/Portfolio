@@ -14,16 +14,59 @@ type SiteHeaderProps = {
 export function SiteHeader({ name }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
+  // Track scrolling even inside the Drei wrapper
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 12);
+    function onScroll(e: Event) {
+      const target = e.target as HTMLElement;
+      if (target && target.scrollTop !== undefined) {
+        setScrolled(target.scrollTop > 12);
+      } else {
+        setScrolled(window.scrollY > 12);
+      }
     }
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    // Use capture phase to intercept scroll from Drei's hidden wrapper
+    window.addEventListener("scroll", onScroll, { capture: true, passive: true });
+    return () => window.removeEventListener("scroll", onScroll, { capture: true });
   }, []);
+
+  // Track active section via IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    // Initial check for sections after 3D loads
+    const timeout = setTimeout(() => {
+      const sections = document.querySelectorAll("section[data-section]");
+      sections.forEach((section) => observer.observe(section));
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+      observer.disconnect();
+    };
+  }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setOpen(false);
+      }
+    }
+  };
 
   return (
     <header
@@ -39,7 +82,7 @@ export function SiteHeader({ name }: SiteHeaderProps) {
           className="group flex items-center gap-3"
           data-sound
           href="#hero"
-          onClick={() => setOpen(false)}
+          onClick={(e) => handleNavClick(e, "#hero")}
         >
           <span className="grid h-9 w-9 place-items-center rounded-md border border-primary/35 bg-primary/10 font-mono text-sm font-bold text-primary shadow-signal-sm">
             CS
@@ -55,12 +98,16 @@ export function SiteHeader({ name }: SiteHeaderProps) {
         </a>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
-          {navItems.slice(1).map((item) => (
+          {navItems.slice(1, -1).map((item) => (
             <a
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+              className={cn(
+                "rounded-md px-3 py-2 text-sm transition hover:bg-white/5 hover:text-foreground",
+                activeSection === item.href.slice(1) ? "text-foreground font-medium bg-white/5" : "text-muted-foreground"
+              )}
               data-sound
               href={item.href}
               key={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
             >
               {item.label}
             </a>
@@ -70,7 +117,7 @@ export function SiteHeader({ name }: SiteHeaderProps) {
         <div className="flex items-center gap-2">
           <SoundToggle />
           <Button asChild className="hidden sm:inline-flex" data-sound size="sm">
-            <a href="#contact">Contact</a>
+            <a href="#contact" onClick={(e) => handleNavClick(e, "#contact")}>Contact</a>
           </Button>
           <Button
             aria-expanded={open}
@@ -97,11 +144,14 @@ export function SiteHeader({ name }: SiteHeaderProps) {
           <nav className="container grid gap-1 py-4" aria-label="Mobile navigation">
             {navItems.slice(1).map((item) => (
               <a
-                className="rounded-md px-3 py-3 text-sm text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+                className={cn(
+                  "rounded-md px-3 py-3 text-sm transition hover:bg-white/5 hover:text-foreground",
+                  activeSection === item.href.slice(1) ? "text-foreground font-medium bg-white/5" : "text-muted-foreground"
+                )}
                 data-sound
                 href={item.href}
                 key={item.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.label}
               </a>
