@@ -1,11 +1,12 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { SoundToggle } from "@/components/layout/sound-toggle";
 import { navItems } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
+import { NavigationState } from "@/lib/navigation-state";
 
 type SiteHeaderProps = {
   name: string;
@@ -15,6 +16,19 @@ export function SiteHeader({ name }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const isProgrammaticScrolling = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Subscribe to the single source of truth for navigation state
+  useEffect(() => {
+    return NavigationState.subscribe((section) => {
+      setActiveSection(section);
+      // Optional: keep URL hash in sync cleanly without jumping
+      if (typeof window !== "undefined" && window.location.hash !== `#${section}`) {
+        window.history.replaceState(null, "", `#${section}`);
+      }
+    });
+  }, []);
 
   // Track scrolling even inside the Drei wrapper
   useEffect(() => {
@@ -36,9 +50,11 @@ export function SiteHeader({ name }: SiteHeaderProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isProgrammaticScrolling.current) return;
+
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            NavigationState.setActiveSection(entry.target.id);
           }
         });
       },
@@ -60,10 +76,25 @@ export function SiteHeader({ name }: SiteHeaderProps) {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault();
+      const targetId = href.slice(1);
       const element = document.querySelector(href);
+      
       if (element) {
+        // Lock intersection observer tracking
+        isProgrammaticScrolling.current = true;
+        
+        // Immediately update state and hash
+        NavigationState.setActiveSection(targetId);
+        
+        // Perform the scroll
         element.scrollIntoView({ behavior: "smooth" });
         setOpen(false);
+
+        // Unlock after smooth scroll completes
+        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+        scrollTimeout.current = setTimeout(() => {
+          isProgrammaticScrolling.current = false;
+        }, 1000);
       }
     }
   };
