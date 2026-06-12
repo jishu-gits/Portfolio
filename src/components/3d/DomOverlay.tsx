@@ -26,7 +26,7 @@ export function DomOverlay({ profile, stats, projects, research, skills, timelin
 
   useEffect(() => {
     let observer: ResizeObserver;
-    
+
     // Register sections initially
     const sections = document.querySelectorAll("section[data-section]");
     sections.forEach((el) => {
@@ -42,13 +42,13 @@ export function DomOverlay({ profile, stats, projects, research, skills, timelin
       else if (id === "certifications") sceneAssoc = "None";
       else if (id === "timeline") sceneAssoc = "TimelineScene";
       else if (id === "contact") sceneAssoc = "None";
-      
+
       SectionRegistry.register(id, el as HTMLElement, sceneAssoc);
     });
 
     if (containerRef.current) {
       observer = new ResizeObserver((entries) => {
-        for (let entry of entries) {
+        for (const entry of entries) {
           if (entry.target === containerRef.current) {
             SectionRegistry.updateDimensions(entry.contentRect.height);
           }
@@ -167,7 +167,7 @@ export function DomOverlay({ profile, stats, projects, research, skills, timelin
         <h2 className="text-4xl font-bold text-white mb-16 tracking-widest uppercase drop-shadow-lg pointer-events-auto bg-black/60 px-8 py-4 rounded-2xl backdrop-blur-xl border border-white/10 shadow-2xl">
           Projects
         </h2>
-        
+
         {projects?.map((project, index) => (
           <div key={project.title} className={`technical-panel glassmorphism rounded-xl p-6 border border-white/10 bg-black/60 backdrop-blur-md pointer-events-auto w-[400px] mb-[75vh] ${index % 2 === 0 ? 'mr-auto ml-12' : 'ml-auto mr-12'}`}>
             <h2 className="text-2xl font-semibold text-white mb-2 drop-shadow-md">{project.title}</h2>
