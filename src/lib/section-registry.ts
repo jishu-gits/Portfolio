@@ -1,12 +1,29 @@
+type Listener = () => void;
+
 export type SectionData = {
   id: string;
   element: HTMLElement | null;
-  targetScrollOffset: number;
+  topOffset: number;
+  height: number;
+  centerOffset: number;
   sceneAssociation: string;
 };
 
 class SectionRegistryManager {
   private sections: Map<string, SectionData> = new Map();
+  public totalHeight: number = 0;
+  private listeners: Set<Listener> = new Set();
+
+  public subscribe(listener: Listener): () => void {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
+  }
+
+  private notifyListeners() {
+    this.listeners.forEach((listener) => listener());
+  }
 
   public register(id: string, element: HTMLElement | null, sceneAssociation: string) {
     if (!element) return;
@@ -14,7 +31,9 @@ class SectionRegistryManager {
     this.sections.set(id, {
       id,
       element,
-      targetScrollOffset: element.offsetTop,
+      topOffset: element.offsetTop,
+      height: element.offsetHeight,
+      centerOffset: element.offsetTop + element.offsetHeight / 2,
       sceneAssociation,
     });
   }
@@ -27,12 +46,16 @@ class SectionRegistryManager {
     return Array.from(this.sections.values());
   }
 
-  public updateOffsets() {
+  public updateDimensions(containerHeight: number) {
+    this.totalHeight = containerHeight;
     this.sections.forEach((section) => {
       if (section.element) {
-        section.targetScrollOffset = section.element.offsetTop;
+        section.topOffset = section.element.offsetTop;
+        section.height = section.element.offsetHeight;
+        section.centerOffset = section.topOffset + section.height / 2;
       }
     });
+    this.notifyListeners();
   }
 }
 

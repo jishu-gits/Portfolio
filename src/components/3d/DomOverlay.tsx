@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { SectionRegistry } from "@/lib/section-registry";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience, Certification } from "@/lib/content-schema";
@@ -22,44 +22,48 @@ type DomOverlayProps = {
 };
 
 export function DomOverlay({ profile, stats, projects, research, skills, timeline, experience, certifications }: DomOverlayProps) {
-  useEffect(() => {
-    // Wait a brief moment to ensure layouts are stable
-    const timeout = setTimeout(() => {
-      const sections = document.querySelectorAll("section[data-section]");
-      sections.forEach((el) => {
-        const id = el.id;
-        // Basic association mapping based on ID
-        let sceneAssoc = "Unknown";
-        if (id === "hero") sceneAssoc = "HeroScene";
-        else if (id === "about") sceneAssoc = "None";
-        else if (id === "skills") sceneAssoc = "SkillsScene";
-        else if (id === "experience") sceneAssoc = "None";
-        else if (id === "projects") sceneAssoc = "Dungeon/VerterraScene";
-        else if (id === "research") sceneAssoc = "ResearchScene";
-        else if (id === "certifications") sceneAssoc = "None";
-        else if (id === "timeline") sceneAssoc = "TimelineScene";
-        else if (id === "contact") sceneAssoc = "None";
-        
-        SectionRegistry.register(id, el as HTMLElement, sceneAssoc);
-      });
-      
-      // Initial offset update
-      SectionRegistry.updateOffsets();
-    }, 1000);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    const onResize = () => {
-      SectionRegistry.updateOffsets();
-    };
-    window.addEventListener("resize", onResize);
+  useEffect(() => {
+    let observer: ResizeObserver;
+    
+    // Register sections initially
+    const sections = document.querySelectorAll("section[data-section]");
+    sections.forEach((el) => {
+      const id = el.id;
+      // Basic association mapping based on ID
+      let sceneAssoc = "Unknown";
+      if (id === "hero") sceneAssoc = "HeroScene";
+      else if (id === "about") sceneAssoc = "None";
+      else if (id === "skills") sceneAssoc = "SkillsScene";
+      else if (id === "experience") sceneAssoc = "None";
+      else if (id === "projects") sceneAssoc = "Dungeon/VerterraScene";
+      else if (id === "research") sceneAssoc = "ResearchScene";
+      else if (id === "certifications") sceneAssoc = "None";
+      else if (id === "timeline") sceneAssoc = "TimelineScene";
+      else if (id === "contact") sceneAssoc = "None";
+      
+      SectionRegistry.register(id, el as HTMLElement, sceneAssoc);
+    });
+
+    if (containerRef.current) {
+      observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (entry.target === containerRef.current) {
+            SectionRegistry.updateDimensions(entry.contentRect.height);
+          }
+        }
+      });
+      observer.observe(containerRef.current);
+    }
 
     return () => {
-      clearTimeout(timeout);
-      window.removeEventListener("resize", onResize);
+      if (observer) observer.disconnect();
     };
   }, []);
 
   return (
-    <div className="w-screen flex flex-col pointer-events-none">
+    <div ref={containerRef} className="w-screen flex flex-col pointer-events-none">
       {/* 1. Hero */}
       <section id="hero" data-section className="w-screen h-screen flex items-center justify-center snap-center relative">
         <div className="flex flex-col items-center text-center max-w-4xl px-8 py-10 pointer-events-auto bg-black/40 backdrop-blur-md rounded-3xl border border-white/10">

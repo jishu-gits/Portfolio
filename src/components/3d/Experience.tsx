@@ -1,10 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll } from "@react-three/drei";
 import { SceneController } from "./SceneController";
 import { DomOverlay } from "./DomOverlay";
 import { ScrollController } from "./ScrollController";
+import { SectionRegistry } from "@/lib/section-registry";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience as ExperienceType, Certification } from "@/lib/content-schema";
 
 type ExperienceProps = {
@@ -24,6 +26,16 @@ type ExperienceProps = {
 };
 
 export default function Experience(props: ExperienceProps) {
+  const [pages, setPages] = useState(10.5);
+
+  useEffect(() => {
+    return SectionRegistry.subscribe(() => {
+      if (SectionRegistry.totalHeight > 0) {
+        setPages(SectionRegistry.totalHeight / window.innerHeight);
+      }
+    });
+  }, []);
+
   return (
     <Canvas
       camera={{ position: [0, 0, 8], fov: 50 }}
@@ -32,8 +44,8 @@ export default function Experience(props: ExperienceProps) {
     >
       <color attach="background" args={["#0a0a0a"]} />
       
-      {/* 10.5 pages of scrolling space for the 9 core DOM sections + Projects expansion */}
-      <ScrollControls damping={0.2} pages={10.5}>
+      {/* Dynamic pages based on actual DOM size */}
+      <ScrollControls damping={0.2} pages={pages}>
         <ScrollController />
         <SceneController {...props} />
         <Scroll html>

@@ -13,7 +13,7 @@ export function ScrollController() {
       const section = SectionRegistry.getSection(sectionId);
       if (section && scroll.el) {
         scroll.el.scrollTo({
-          top: section.targetScrollOffset,
+          top: section.topOffset,
           behavior: "smooth",
         });
       }
