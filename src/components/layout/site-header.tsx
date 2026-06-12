@@ -77,25 +77,23 @@ export function SiteHeader({ name }: SiteHeaderProps) {
     if (href.startsWith("#")) {
       e.preventDefault();
       const targetId = href.slice(1);
-      const element = document.querySelector(href);
       
-      if (element) {
-        // Lock intersection observer tracking
-        isProgrammaticScrolling.current = true;
-        
-        // Immediately update state and hash
-        NavigationState.setActiveSection(targetId);
-        
-        // Perform the scroll
-        element.scrollIntoView({ behavior: "smooth" });
-        setOpen(false);
+      // Lock intersection observer tracking
+      isProgrammaticScrolling.current = true;
+      
+      // Request scroll inside Drei canvas
+      NavigationState.requestScrollTo(targetId);
+      
+      // Immediately update state for instant UI feedback
+      NavigationState.setActiveSection(targetId);
+      
+      setOpen(false);
 
-        // Unlock after smooth scroll completes
-        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-        scrollTimeout.current = setTimeout(() => {
-          isProgrammaticScrolling.current = false;
-        }, 1000);
-      }
+      // Unlock after smooth scroll completes
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
+        isProgrammaticScrolling.current = false;
+      }, 1000);
     }
   };
 

@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll } from "@react-three/drei";
 import { SceneController } from "./SceneController";
 import { DomOverlay } from "./DomOverlay";
+import { ScrollController } from "./ScrollController";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience as ExperienceType, Certification } from "@/lib/content-schema";
 
 type ExperienceProps = {
@@ -33,10 +34,12 @@ export default function Experience(props: ExperienceProps) {
       
       {/* 10.5 pages of scrolling space for the 9 core DOM sections + Projects expansion */}
       <ScrollControls damping={0.2} pages={10.5}>
+        <ScrollController />
         <SceneController {...props} />
         <Scroll html>
           <DomOverlay {...props} />
         </Scroll>
+
       </ScrollControls>
     </Canvas>
   );

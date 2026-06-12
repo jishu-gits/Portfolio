@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
+import { SectionRegistry } from "@/lib/section-registry";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience, Certification } from "@/lib/content-schema";
 
 type DomOverlayProps = {
@@ -20,6 +22,42 @@ type DomOverlayProps = {
 };
 
 export function DomOverlay({ profile, stats, projects, research, skills, timeline, experience, certifications }: DomOverlayProps) {
+  useEffect(() => {
+    // Wait a brief moment to ensure layouts are stable
+    const timeout = setTimeout(() => {
+      const sections = document.querySelectorAll("section[data-section]");
+      sections.forEach((el) => {
+        const id = el.id;
+        // Basic association mapping based on ID
+        let sceneAssoc = "Unknown";
+        if (id === "hero") sceneAssoc = "HeroScene";
+        else if (id === "about") sceneAssoc = "None";
+        else if (id === "skills") sceneAssoc = "SkillsScene";
+        else if (id === "experience") sceneAssoc = "None";
+        else if (id === "projects") sceneAssoc = "Dungeon/VerterraScene";
+        else if (id === "research") sceneAssoc = "ResearchScene";
+        else if (id === "certifications") sceneAssoc = "None";
+        else if (id === "timeline") sceneAssoc = "TimelineScene";
+        else if (id === "contact") sceneAssoc = "None";
+        
+        SectionRegistry.register(id, el as HTMLElement, sceneAssoc);
+      });
+      
+      // Initial offset update
+      SectionRegistry.updateOffsets();
+    }, 1000);
+
+    const onResize = () => {
+      SectionRegistry.updateOffsets();
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
     <div className="w-screen flex flex-col pointer-events-none">
       {/* 1. Hero */}
