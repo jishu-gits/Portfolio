@@ -91,7 +91,12 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     function handlePointer(event: Event) {
       const target = event.target as HTMLElement | null;
-      const soundTarget = target?.closest<HTMLElement>("[data-sound]");
+      
+      if (!target || typeof target.closest !== 'function') {
+        return;
+      }
+
+      const soundTarget = target.closest<HTMLElement>("[data-sound]");
 
       if (!soundTarget) {
         return;

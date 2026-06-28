@@ -3,28 +3,28 @@
     "title": "Java Foundation Associate",
     "issuer": "Oracle",
     "date": "2025-08",
-    "pdfProof": "/documents/Java Foundation Associate Oracle.pdf",
-    "previewImage": "/documents/Java Foundations.png"
+    "pdfProof": "/media/certifications/Java Foundation Associate Oracle.pdf",
+    "previewImage": "/media/certifications/Java Foundations.png"
   },
   {
     "title": "Cyber Security Analyst",
     "issuer": "IBM",
     "date": "2025-05",
-    "pdfProof": "/documents/Cyber Security Analyst IBM.pdf",
-    "previewImage": "/documents/Cyber Security Analyst.png"
+    "pdfProof": "/media/certifications/Cyber Security Analyst IBM.pdf",
+    "previewImage": "/media/certifications/Cyber Security Analyst.png"
   },
   {
     "title": "Introduction to Cloud Computing",
     "issuer": "Simplilearn",
     "date": "2025-04",
-    "pdfProof": "/documents/Cloud COmputing Simplilearn.pdf",
-    "previewImage": "/documents/Intro to Cloud Computing.png"
+    "pdfProof": "/media/certifications/Cloud COmputing Simplilearn.pdf",
+    "previewImage": "/media/certifications/Intro to Cloud Computing.png"
   },
   {
     "title": "Intro to AR/VR/MR/XR: Technologies, Applications and Issues",
     "issuer": "University of Michigan (Coursera)",
     "date": "2023-12",
-    "pdfProof": "/documents/Intro to AR.pdf",
-    "previewImage": "/documents/Intro to AR.png"
+    "pdfProof": "/media/certifications/Intro to AR.pdf",
+    "previewImage": "/media/certifications/Intro to AR.png"
   }
 ]

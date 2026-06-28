@@ -169,6 +169,33 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
                 ) : null}
               </div>
 
+              <div className="mt-6 flex flex-wrap gap-3">
+                {isPresent(project.github) ? (
+                  <Button asChild data-sound size="sm" variant="outline" onClick={(e) => e.stopPropagation()}>
+                    <a
+                      href={project.github}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <Github aria-hidden="true" className="mr-2 h-4 w-4" />
+                      GitHub
+                    </a>
+                  </Button>
+                ) : null}
+                {isPresent(project.demo) ? (
+                  <Button asChild data-sound size="sm" onClick={(e) => e.stopPropagation()}>
+                    <a
+                      href={project.demo}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Demo
+                      <ExternalLink aria-hidden="true" className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                ) : null}
+              </div>
+
               <div className="mt-4 flex items-center gap-2 font-mono text-xs text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <span className="animated-underline">View Details</span>
                 <ArrowRight className="h-3 w-3" />

@@ -85,7 +85,7 @@ export function DungeonScene({ projects }: { projects: Project[] }) {
     <group>
       <instancedMesh ref={meshRef} args={[undefined, undefined, totalBlocks]}>
         <boxGeometry args={[blockSize * 0.9, blockSize * 0.9, blockSize * 0.9]} />
-        <meshStandardMaterial color="#84cc16" roughness={0.2} metalness={0.8} />
+        <meshStandardMaterial color="#71a5a5" roughness={0.2} metalness={0.8} />
       </instancedMesh>
     </group>
   );

@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Github, ExternalLink, FileText } from "lucide-react";
+import { isPresent } from "@/lib/utils";
 import { SectionRegistry } from "@/lib/section-registry";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience, Certification } from "@/lib/content-schema";
 
@@ -197,6 +200,25 @@ export function DomOverlay({ profile, stats, projects, research, skills, timelin
                 </Badge>
               ))}
             </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              {isPresent(project.github) ? (
+                <Button asChild data-sound size="sm" variant="outline" className="border-white/20 hover:bg-white/10">
+                  <a href={project.github} rel="noreferrer" target="_blank">
+                    <Github aria-hidden="true" className="mr-2 h-4 w-4" />
+                    GitHub
+                  </a>
+                </Button>
+              ) : null}
+              {isPresent(project.demo) ? (
+                <Button asChild data-sound size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <a href={project.demo} rel="noreferrer" target="_blank">
+                    Demo
+                    <ExternalLink aria-hidden="true" className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              ) : null}
+            </div>
           </div>
         ))}
       </section>
@@ -241,10 +263,25 @@ export function DomOverlay({ profile, stats, projects, research, skills, timelin
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
           {certifications?.map((cert) => (
-            <div key={cert.title} className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-primary/50 transition-colors shadow-lg">
+            <div key={cert.title} className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-primary/50 transition-colors shadow-lg flex flex-col">
+              {isPresent(cert.previewImage) ? (
+                <div className="mb-4 rounded-lg overflow-hidden border border-white/10 aspect-[16/10]">
+                  <img src={cert.previewImage} alt={`${cert.title} preview`} className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+                </div>
+              ) : null}
               <p className="font-mono text-xs uppercase text-primary mb-2">{cert.issuer}</p>
               <h3 className="text-lg font-bold text-white mb-2">{cert.title}</h3>
-              <p className="text-sm text-neutral-400 font-mono">{cert.date}</p>
+              <p className="text-sm text-neutral-400 font-mono mb-4">{cert.date}</p>
+              {isPresent(cert.pdfProof) ? (
+                <div className="mt-auto pt-2 border-t border-white/10">
+                  <Button asChild data-sound size="sm" variant="outline" className="w-full mt-2 border-white/20 hover:bg-white/10">
+                    <a href={cert.pdfProof} rel="noreferrer" target="_blank">
+                      <FileText aria-hidden="true" className="mr-2 h-4 w-4" />
+                      View PDF Proof
+                    </a>
+                  </Button>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

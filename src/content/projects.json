@@ -61,5 +61,53 @@
     ],
     "certificates": [],
     "documents": []
+  },
+  {
+    "title": "Website RAG Assistant",
+    "description": "An AI-powered Retrieval-Augmented Generation assistant. Performs website crawling and semantic search utilizing a FAISS vector database. Built with Google Gemini, FastAPI backend, and Next.js frontend with a modern UI. Containerised with Docker and deployed on Vercel and Render, featuring accurate source citations.",
+    "technologies": [
+      "Next.js",
+      "FastAPI",
+      "Google Gemini",
+      "FAISS",
+      "Docker",
+      "Vercel",
+      "Render",
+      "RAG"
+    ],
+    "github": "https://github.com/jishu-gits/website-rag",
+    "demo": "https://website-rag-roan.vercel.app/chat",
+    "images": [
+      {
+        "src": "/media/projects/website-rag.png",
+        "alt": "Website RAG Assistant Interface"
+      }
+    ],
+    "videos": [],
+    "certificates": [],
+    "documents": []
+  },
+  {
+    "title": "AI Notes Converter",
+    "description": "AI-powered note conversion tool with a beautiful animated interface. Features a robust OCR pipeline for PDF and image upload to generate accurate Markdown. Supports streaming responses and multiple LLM providers, with provider fallback between Google Gemini and NVIDIA NIM.",
+    "technologies": [
+      "Next.js",
+      "Google Gemini",
+      "NVIDIA NIM",
+      "OCR",
+      "Markdown Generation",
+      "Streaming APIs"
+    ],
+    "github": "https://github.com/jishu-gits/Notes-Converter-Agent",
+    "demo": "https://notes-converter-agent.vercel.app/",
+    "images": [
+      {
+        "src": "/media/projects/notes-ai.png",
+        "alt": "AI Notes Converter Interface"
+      }
+    ],
+    "videos": [],
+    "certificates": [],
+    "documents": []
   }
 ]

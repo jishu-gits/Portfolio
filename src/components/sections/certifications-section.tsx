@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Award, ExternalLink } from "lucide-react";
+import { Award, ExternalLink, FileText } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/sections/section-heading";
@@ -79,6 +79,21 @@ export function CertificationsSection({
               <p className="mt-1 text-sm text-muted-foreground">
                 {certificate.issuer}
               </p>
+              
+              {isPresent(certificate.pdfProof) ? (
+                <div className="mt-4">
+                  <Button asChild data-sound size="sm" variant="outline" onClick={(e) => e.stopPropagation()}>
+                    <a
+                      href={certificate.pdfProof}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <FileText aria-hidden="true" className="mr-2 h-4 w-4" />
+                      View PDF Proof
+                    </a>
+                  </Button>
+                </div>
+              ) : null}
             </article>
           ))}
         </div>
