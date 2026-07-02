@@ -109,5 +109,19 @@
     "videos": [],
     "certificates": [],
     "documents": []
+  },
+  {
+    "title": "Haunted Maze",
+    "description": "A procedural 3D maze game where the player must navigate a haunted environment, collect gems, and avoid roaming zombies. Features image-based procedural map generation using 2D textures, dynamic spawning of entities and lights with distance-maximization algorithms, immersive player mechanics with audio-visual feedback, and win/loss conditions based on gem collection and zombie encounters.",
+    "technologies": [
+      "Unity 3D",
+      "C#"
+    ],
+    "github": "https://github.com/jishu-gits/Haunted-Maze",
+    "demo": "https://bidhans.itch.io/haunted-maze",
+    "images": [],
+    "videos": [],
+    "certificates": [],
+    "documents": []
   }
 ]
