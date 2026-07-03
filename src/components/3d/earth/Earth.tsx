@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, ThreeEvent } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useEarthTextures } from './useEarthTextures';
 import { CloudLayer } from './CloudLayer';
@@ -38,7 +38,7 @@ export function Earth({ radius = 2, rotationSpeed = 0.02, interactive = true }: 
     }
   });
 
-  const onPointerDown = (e: any) => {
+  const onPointerDown = (e: ThreeEvent<PointerEvent> & { target: HTMLElement }) => {
     if (!interactive) return;
     e.stopPropagation();
     if (e.target && e.target.setPointerCapture) {
@@ -49,7 +49,7 @@ export function Earth({ radius = 2, rotationSpeed = 0.02, interactive = true }: 
     momentum.current = { x: 0, y: 0 };
   };
 
-  const onPointerUp = (e: any) => {
+  const onPointerUp = (e: ThreeEvent<PointerEvent> & { target: HTMLElement }) => {
     if (isDragging.current && e.target && e.target.releasePointerCapture) {
       try {
         e.target.releasePointerCapture(e.pointerId);
@@ -58,7 +58,7 @@ export function Earth({ radius = 2, rotationSpeed = 0.02, interactive = true }: 
     isDragging.current = false;
   };
 
-  const onPointerMove = (e: any) => {
+  const onPointerMove = (e: ThreeEvent<PointerEvent> & { target: HTMLElement }) => {
     if (!interactive || !isDragging.current || !groupRef.current) return;
     e.stopPropagation();
     
