@@ -73,7 +73,7 @@ export function DungeonScene({ projects }: { projects: Project[] }) {
         <pointLight ref={lightRef} color="#ffffff" distance={3} decay={2} castShadow={false} intensity={0} position={[0, 1, 0]} />
         <mesh ref={meshRef} visible={false}>
           <sphereGeometry args={[0.02, 8, 8]} />
-          <meshBasicMaterial color={[1, 1, 1].map(c => c * 2) as any} toneMapped={false} />
+          <meshBasicMaterial color={[2, 2, 2]} toneMapped={false} />
         </mesh>
       </group>
     );

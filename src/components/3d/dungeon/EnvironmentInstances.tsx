@@ -5,7 +5,7 @@ import { EnvironmentData, PropInstance } from './EnvironmentTypes';
 import { DungeonMaterial } from './DungeonMaterial';
 import { useTorchInteraction } from './interaction/DungeonInteraction';
 
-function applyInstances(meshRef: React.RefObject<THREE.InstancedMesh>, instances: PropInstance[]) {
+function applyInstances(meshRef: React.RefObject<THREE.InstancedMesh | null>, instances: PropInstance[]) {
   if (meshRef.current) {
     const dummy = new THREE.Object3D();
     instances.forEach((inst, i) => {
@@ -208,7 +208,7 @@ function TorchLight({
     <group position={flamePos}>
       <mesh ref={(el) => { flameRefs.current[index] = el; }}>
         <sphereGeometry args={[0.04, 8, 8]} />
-        <meshBasicMaterial color={[1, 0.6, 0].map(c => c * 2) as any} toneMapped={false} />
+        <meshBasicMaterial color={[2, 1.2, 0]} toneMapped={false} />
       </mesh>
       <pointLight ref={(el) => { lightRefs.current[index] = el; }} color="#ff8800" distance={4} decay={2} castShadow={false} />
     </group>

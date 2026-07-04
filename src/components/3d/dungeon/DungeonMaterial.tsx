@@ -1,8 +1,8 @@
-import { MeshStandardMaterialProps } from '@react-three/fiber';
+import { ThreeElements } from '@react-three/fiber';
 import { useDungeonTextures } from './useDungeonTextures';
 import * as THREE from 'three';
 
-export function DungeonMaterial(props: MeshStandardMaterialProps) {
+export function DungeonMaterial(props: ThreeElements['meshStandardMaterial']) {
   const { colorMap, normalMap, roughnessMap, aoMap, displacementMap } = useDungeonTextures();
 
   return (

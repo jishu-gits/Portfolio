@@ -1,42 +1,32 @@
 import React from 'react';
 import { EffectComposer, SSAO, Bloom, BrightnessContrast, Vignette } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
+import * as THREE from 'three';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const B = BrightnessContrast as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const V = Vignette as any;
 
 export function PostProcessing() {
   return (
-    <EffectComposer disableNormalPass={false} multisampling={0}>
-      {/* 
-        SSAO for contact shadows in corners.
-        We disable normal pass on EffectComposer to let SSAO handle its own normals if needed,
-        or we can let it use depth. This configuration is lightweight.
-      */}
+    <EffectComposer multisampling={0}>
       <SSAO 
         blendFunction={BlendFunction.MULTIPLY} 
         samples={16} 
         radius={0.2} 
         intensity={15} 
         luminanceInfluence={0.5} 
-        color={0x000000}
+        color={new THREE.Color(0x000000)}
       />
-      
-      {/* 
-        Bloom targeted at emissive materials (torches).
-        High luminance threshold ensures stone walls do not bloom.
-      */}
       <Bloom 
         intensity={1.0} 
         luminanceThreshold={0.8} 
         luminanceSmoothing={0.1} 
         mipmapBlur 
       />
-
-      {/* Cinematic Color Grading */}
-      {/* @ts-ignore - React 19 type compatibility */}
-      <BrightnessContrast brightness={-0.05} contrast={0.15} />
-      
-      {/* Dark Vignette to focus attention on the center */}
-      {/* @ts-ignore - React 19 type compatibility */}
-      <Vignette eskil={false} offset={0.1} darkness={1.1} blendFunction={BlendFunction.NORMAL} />
+      <B brightness={-0.05} contrast={0.15} />
+      <V eskil={false} offset={0.1} darkness={1.1} blendFunction={BlendFunction.NORMAL} />
     </EffectComposer>
   );
 }

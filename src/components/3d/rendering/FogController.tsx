@@ -16,6 +16,6 @@ export function FogController() {
   });
 
   return (
-    <fogExp2 ref={fogRef} attach="fog" color="#0a0f18" density={0.035} />
+    <fogExp2 ref={fogRef} attach="fog" args={["#0a0f18", 0.035]} />
   );
 }
