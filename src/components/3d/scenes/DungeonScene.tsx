@@ -1,92 +1,116 @@
 "use client";
 
-import { Html } from "@react-three/drei";
-import { Badge } from "@/components/ui/badge";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useMemo, useState, useEffect } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import type { Project } from "@/lib/content-schema";
+import { MazeGenerator } from "@/lib/dungeon/MazeGenerator";
+import { DungeonBuilder } from "@/lib/dungeon/DungeonBuilder";
+import { DungeonMaterial, EnvironmentGenerator, EnvironmentInstances } from "@/components/3d/dungeon";
+import { CameraRig, DungeonRaycaster, useWallInteraction, HoverState } from "@/components/3d/dungeon/interaction";
+import { DungeonRenderer } from "@/components/3d/rendering";
+import { DungeonPresentation } from "@/components/3d/presentation";
+import { useFrame } from "@react-three/fiber";
 
 export function DungeonScene({ projects }: { projects: Project[] }) {
-  const project = projects.find((p) => p.title.toLowerCase().includes("dungeon")) || projects[0];
   const meshRef = useRef<THREE.InstancedMesh>(null);
+  const geometryRef = useRef<THREE.BoxGeometry>(null);
   
-  // Grid settings
-  const gridSize = 20;
+  // Settings
+  const gridSize = 21;
   const blockSize = 1;
-  const totalBlocks = gridSize * gridSize;
+  const seed = 12345;
   
-  // State for procedural generation
-  const [grid, setGrid] = useState<boolean[]>(new Array(totalBlocks).fill(false));
-  const [animating, setAnimating] = useState(true);
-
-  // Procedural Generation Algorithm (Random Walk)
-  useEffect(() => {
-    let currentX = Math.floor(gridSize / 2);
-    let currentY = Math.floor(gridSize / 2);
-    let step = 0;
-    const maxSteps = 150;
-    const newGrid = new Array(totalBlocks).fill(false);
-
-    const interval = setInterval(() => {
-      if (step >= maxSteps) {
-        clearInterval(interval);
-        setAnimating(false);
-        return;
-      }
-
-      newGrid[currentY * gridSize + currentX] = true;
-      setGrid([...newGrid]);
-
-      // Random Walk
-      const dir = Math.floor(Math.random() * 4);
-      if (dir === 0 && currentY > 1) currentY -= 1;
-      else if (dir === 1 && currentY < gridSize - 2) currentY += 1;
-      else if (dir === 2 && currentX > 1) currentX -= 1;
-      else if (dir === 3 && currentX < gridSize - 2) currentX += 1;
-
-      step++;
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
+  // Generate Maze, Walls & Environment only once
+  const { walls, envData } = useMemo(() => {
+    const generator = new MazeGenerator(gridSize, gridSize, seed);
+    const grid = generator.generate();
+    
+    const builder = new DungeonBuilder(blockSize, seed);
+    const walls = builder.buildWalls(grid);
+    
+    const envGen = new EnvironmentGenerator(blockSize, seed);
+    const envData = envGen.generate(grid);
+    
+    return { walls, envData };
+  }, [gridSize, blockSize, seed]);
 
   // Update InstancedMesh
-  useFrame((state, delta) => {
+  useEffect(() => {
     if (meshRef.current) {
       const dummy = new THREE.Object3D();
-      let index = 0;
-      for (let y = 0; y < gridSize; y++) {
-        for (let x = 0; x < gridSize; x++) {
-          if (grid[y * gridSize + x]) {
-            dummy.position.set(
-              (x - gridSize / 2) * blockSize,
-              0,
-              (y - gridSize / 2) * blockSize
-            );
-            // Add some pulse effect to the blocks
-            const scale = 1 + Math.sin(state.clock.elapsedTime * 2 + index) * 0.1;
-            dummy.scale.set(scale, scale, scale);
-            dummy.updateMatrix();
-            meshRef.current.setMatrixAt(index, dummy.matrix);
-            index++;
-          }
-        }
-      }
-      meshRef.current.count = index;
+      walls.forEach((wall, i) => {
+        dummy.position.copy(wall.position);
+        dummy.scale.copy(wall.scale);
+        dummy.updateMatrix();
+        meshRef.current!.setMatrixAt(i, dummy.matrix);
+      });
       meshRef.current.instanceMatrix.needsUpdate = true;
-      
-      meshRef.current.rotation.y += delta * 0.05;
-      meshRef.current.rotation.x = Math.PI / 6; // Isometric view
     }
-  });
+  }, [walls]);
+
+  // ----------------------------------------------------
+  // Dynamic Cursor Light Component
+  // ----------------------------------------------------
+  function DynamicCursorLight() {
+    const lightRef = useRef<THREE.PointLight>(null);
+    const meshRef = useRef<THREE.Mesh>(null);
+    useFrame(() => {
+      if (!lightRef.current || !meshRef.current) return;
+      if (HoverState.active) {
+        // Smoothly move light towards mouse world position
+        lightRef.current.position.lerp(HoverState.worldPosition, 0.2);
+        meshRef.current.position.copy(lightRef.current.position);
+        lightRef.current.intensity = THREE.MathUtils.lerp(lightRef.current.intensity, 0.4, 0.1);
+        meshRef.current.visible = true;
+      } else {
+        // Fade out when not hovering
+        lightRef.current.intensity = THREE.MathUtils.lerp(lightRef.current.intensity, 0, 0.1);
+        if (lightRef.current.intensity < 0.01) meshRef.current.visible = false;
+      }
+    });
+    return (
+      <group>
+        <pointLight ref={lightRef} color="#ffffff" distance={3} decay={2} castShadow={false} intensity={0} position={[0, 1, 0]} />
+        <mesh ref={meshRef} visible={false}>
+          <sphereGeometry args={[0.02, 8, 8]} />
+          <meshBasicMaterial color={[1, 1, 1].map(c => c * 2) as any} toneMapped={false} />
+        </mesh>
+      </group>
+    );
+  }
+
+  // ----------------------------------------------------
+  // Apply wall interaction hook
+  // ----------------------------------------------------
+  useWallInteraction(meshRef, walls);
+
+  // Setup UV2 for AO map
+  useEffect(() => {
+    if (geometryRef.current && geometryRef.current.attributes.uv) {
+      geometryRef.current.setAttribute(
+        "uv2",
+        new THREE.BufferAttribute(geometryRef.current.attributes.uv.array, 2)
+      );
+    }
+  }, []);
 
   return (
-    <group>
-      <instancedMesh ref={meshRef} args={[undefined, undefined, totalBlocks]}>
-        <boxGeometry args={[blockSize * 0.9, blockSize * 0.9, blockSize * 0.9]} />
-        <meshStandardMaterial color="#71a5a5" roughness={0.2} metalness={0.8} />
-      </instancedMesh>
-    </group>
+    <DungeonRenderer>
+      <DungeonPresentation>
+        <CameraRig>
+          <group>
+            <DungeonRaycaster />
+            <DynamicCursorLight />
+
+            <instancedMesh ref={meshRef} args={[undefined, undefined, walls.length]} castShadow receiveShadow>
+              <boxGeometry ref={geometryRef} args={[blockSize, blockSize, blockSize]} />
+              <DungeonMaterial attach="material" />
+            </instancedMesh>
+            
+            <EnvironmentInstances data={envData} />
+          </group>
+        </CameraRig>
+      </DungeonPresentation>
+    </DungeonRenderer>
   );
 }

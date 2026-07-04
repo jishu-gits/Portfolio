@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll } from "@react-three/drei";
 import { SceneController } from "./SceneController";
@@ -47,7 +47,9 @@ export default function Experience(props: ExperienceProps) {
       {/* Dynamic pages based on actual DOM size */}
       <ScrollControls damping={0.2} pages={pages}>
         <ScrollController />
-        <SceneController {...props} />
+        <Suspense fallback={null}>
+          <SceneController {...props} />
+        </Suspense>
         <Scroll html>
           <DomOverlay {...props} />
         </Scroll>
