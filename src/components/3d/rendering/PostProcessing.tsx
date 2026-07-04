@@ -16,7 +16,7 @@ export function PostProcessing() {
         radius={0.2} 
         intensity={15} 
         luminanceInfluence={0.5} 
-        color="black"
+        color={0x000000}
       />
       
       {/* 
@@ -31,9 +31,11 @@ export function PostProcessing() {
       />
 
       {/* Cinematic Color Grading */}
+      {/* @ts-ignore - React 19 type compatibility */}
       <BrightnessContrast brightness={-0.05} contrast={0.15} />
       
       {/* Dark Vignette to focus attention on the center */}
+      {/* @ts-ignore - React 19 type compatibility */}
       <Vignette eskil={false} offset={0.1} darkness={1.1} blendFunction={BlendFunction.NORMAL} />
     </EffectComposer>
   );

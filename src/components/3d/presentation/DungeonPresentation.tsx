@@ -4,7 +4,7 @@ import { useFrame } from '@react-three/fiber';
 import { useCameraDirector } from './CameraDirector';
 import { PresentationState } from './PresentationState';
 
-function useGenerationReplay(groupRef: React.RefObject<THREE.Group>) {
+function useGenerationReplay(groupRef: React.RefObject<THREE.Group | null>) {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
     

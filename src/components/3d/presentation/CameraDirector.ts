@@ -4,7 +4,7 @@ import { useScroll } from '@react-three/drei';
 import { PresentationState } from './PresentationState';
 import { FocusTargets } from './FocusTargets';
 
-export function useCameraDirector(groupRef: React.RefObject<THREE.Group>) {
+export function useCameraDirector(groupRef: React.RefObject<THREE.Group | null>) {
   const scroll = useScroll();
 
   useFrame((state, delta) => {

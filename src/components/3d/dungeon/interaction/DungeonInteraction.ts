@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { HoverState } from './DungeonHoverState';
 
 export function useWallInteraction(
-  meshRef: React.RefObject<THREE.InstancedMesh>,
+  meshRef: React.RefObject<THREE.InstancedMesh | null>,
   originalTransforms: { position: THREE.Vector3; scale: THREE.Vector3 }[]
 ) {
   useFrame(() => {
