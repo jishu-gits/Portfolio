@@ -5,7 +5,7 @@
     "items": [
       {
         "name": "Java",
-        "level": 90,
+        "level": 0,
         "focus": "Spring Boot applications, backend systems"
       },
       {

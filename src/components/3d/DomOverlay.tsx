@@ -3,9 +3,10 @@
 import { useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { isPresent } from "@/lib/utils";
 import { SectionRegistry } from "@/lib/section-registry";
+import { ProjectsSection } from "@/components/sections/projects-section";
 import type { Profile, Project, Research, SkillGroup, TimelineItem, Experience, Certification } from "@/lib/content-schema";
 
 type DomOverlayProps = {
@@ -166,62 +167,7 @@ export function DomOverlay({ profile, stats, projects, research, skills, timelin
       </section>
 
       {/* 5. Projects */}
-      <section id="projects" data-section className="w-screen min-h-[200vh] flex flex-col items-center justify-start pt-32 px-12 md:px-24 relative pointer-events-none">
-        <h2 className="text-4xl font-bold text-white mb-16 tracking-widest uppercase drop-shadow-lg pointer-events-auto bg-black/60 px-8 py-4 rounded-2xl backdrop-blur-xl border border-white/10 shadow-2xl">
-          Projects
-        </h2>
-
-        {projects?.map((project, index) => (
-          <div key={project.title} className={`technical-panel glassmorphism rounded-xl p-6 border border-white/10 bg-black/60 backdrop-blur-md pointer-events-auto w-[400px] mb-[75vh] ${index % 2 === 0 ? 'mr-auto ml-12' : 'ml-auto mr-12'}`}>
-            <h2 className="text-2xl font-semibold text-white mb-2 drop-shadow-md">{project.title}</h2>
-            <p className="text-sm text-neutral-300 font-mono mb-4 leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-              {project.description}
-            </p>
-
-            {project.videos && project.videos.length > 0 && (
-              <div className="mb-4 rounded-lg overflow-hidden border border-white/10">
-                {project.videos[0].url.endsWith('.mp4') ? (
-                  <video src={project.videos[0].url} autoPlay loop muted playsInline className="w-full h-auto" />
-                ) : (
-                  <img src={project.videos[0].url} alt={project.videos[0].label} className="w-full h-auto" />
-                )}
-              </div>
-            )}
-            {project.images && project.images.length > 0 && (!project.videos || project.videos.length === 0) && (
-              <div className="mb-4 rounded-lg overflow-hidden border border-white/10">
-                <img src={project.images[0].src} alt={project.images[0].alt} className="w-full h-auto" />
-              </div>
-            )}
-
-            <div className="flex flex-wrap gap-2">
-              {project.technologies?.map((tech: string) => (
-                <Badge key={tech} variant="secondary" className="text-xs bg-white/5 border-white/10">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              {isPresent(project.github) ? (
-                <Button asChild data-sound size="sm" variant="outline" className="border-white/20 hover:bg-white/10">
-                  <a href={project.github} rel="noreferrer" target="_blank">
-                    <Github aria-hidden="true" className="mr-2 h-4 w-4" />
-                    GitHub
-                  </a>
-                </Button>
-              ) : null}
-              {isPresent(project.demo) ? (
-                <Button asChild data-sound size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  <a href={project.demo} rel="noreferrer" target="_blank">
-                    Demo
-                    <ExternalLink aria-hidden="true" className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              ) : null}
-            </div>
-          </div>
-        ))}
-      </section>
+      <ProjectsSection projects={projects} />
 
       {/* 6. Research */}
       <section id="research" data-section className="w-screen h-screen flex items-center justify-start px-12 md:px-24 snap-center relative pointer-events-none">
